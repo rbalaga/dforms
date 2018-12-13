@@ -27,9 +27,14 @@ function addParagraph(parent) {
 
 }
 
+
+$QuestionsListGroup = $('.QuestionsList');
+var controlForm = $($QuestionsListGroup).find('.Question:first').clone();
+
 $(function () {
 
-    $(document).on('change', '.QuestionType', function (e) {
+
+    $(document).on('change', '.slctQuestionType', function (e) {
         $relatedOptionsElement = $(this).closest('.Question').find('.Options');
         e.preventDefault();
         switch ($(this).val()) {
@@ -52,7 +57,6 @@ $(function () {
         var controlForm = $($relatedOptionsElement).find('.controls:first'),
             currentEntry = $(this).parents('.entry:first'),
             newEntry = $(currentEntry.clone()).appendTo(controlForm);
-
         newEntry.find('input').val('');
         controlForm.find('.entry:not(:last) .btn-add')
             .removeClass('btn-add').addClass('btn-remove')
@@ -64,4 +68,55 @@ $(function () {
         e.preventDefault();
         return false;
     });
+
+    $(document).on('click', '.addQuestion', function (e) {
+        e.preventDefault();
+        // currentEntry = $(this).parents('.entry:first'),
+        $(controlForm).appendTo($QuestionsListGroup);
+        controlForm = controlForm.clone();
+    });
+
+    $(document).on('click', '.saveForm', function (e) {
+        e.preventDefault();
+        var finalQuestions = $('.QuestionsList .Question');
+        var FormObj = new Object();
+        FormObj.FormTitle = $('.formTitle').html();
+        FormObj.Questions = Array();
+        finalQuestions.each(function (Idx, Question) {
+            var QuestionObj = new Object();
+            QuestionObj.QuestionTitle = $(Question).find('.inpQuestionTitle').val();
+            QuestionObj.QuestionType = $(Question).find('.slctQuestionType').val();
+            QuestionObj.isRequired = $(Question).find('.isRequired')[0].checked;            
+            QuestionObj.Options = Array();
+            if (QuestionObj.QuestionType == "MultipleChoice") {
+                $(Question).find("input[name*='Choices']").each(function () {
+                    QuestionObj.Options.push($(this).val());
+                    // alert(QuestionTitle + '=' +  $(this).val());
+                });
+            }
+            FormObj.Questions.push(QuestionObj);
+        });
+
+        postToServer(FormObj);
+
+    });
+
 });
+
+
+function postToServer(formData) {
+    $.ajax({
+        type: 'POST',
+        url: 'app/view.php',
+        dataType: 'json',
+        data:{
+            FORM : formData,
+        },
+        success: function (response) {
+            alert(JSON.stringify(response));            
+        },
+        error: function (error) {
+            alert(JSON.stringify(error));
+        }
+    })
+}

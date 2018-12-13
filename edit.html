@@ -21,30 +21,32 @@
 <body class="bg-dark">
 
     <!-- Navigation -->
-    <div class="container row mx-auto mt-5">
-        <div class="col-lg-10 col-md-8 col-sm-12">
-            <div class="card card-login">
-                <div class="card-header formName" contenteditable="true">New Form</div>
-                <form id="fmCustomForm">
-                    <div class="list-group m-4 QuestionsList">
+    <div class="container mx-auto mt-5">
+        <div class="row">
+            <div class="col-lg-10 col-md-8 col-sm-12">
+                <div class="card card-login">
+                    <div class="card-header formTitle" contenteditable="true">New Form</div>
+                    <form id="fmCustomForm">
+                        <div class="list-group m-4 QuestionsList">
                             <div class="list-group-item card-body Question">
-                                <label for="inputPassword">Question</label>
                                 <div class="form-row">
-                                    <div class="col-9">
-                                        <input type="text" class="form-control" placeholder="City">
-                                    </div>
-                                    <div class="col-lg-3 col-md-9">
-                                        <select class="form-control QuestionType">
+                                    <div class="col-lg-9 col-md-12">
+                                            <label for="inputPassword">Question</label>
+                                            <input type="text" class="form-control inpQuestionTitle" name="inpQuestionTitle" placeholder="Question">
+                                        </div>
+                                        <div class="col-lg-3 col-md-9">
+                                                <label for="slctQuestionType">Type</label>
+                                        <select class="form-control slctQuestionType" name="slctQuestionType">
                                             <option value="Paragraph">Paragraph</option>
                                             <option selected value="MultipleChoice">Multiple choice</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="Options">
-                                    <div class="control-group mt-3" id="fields">
+                                    <div class="control-group mt-3" id="Choices">
                                         <div class="controls">
                                             <div class="entry input-group col-xs-3">
-                                                <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+                                                <input class="form-control" name="Choices[]" type="text" placeholder="Type something" />
                                                 <span class="input-group-btn input-group-append">
                                                     <button class="btn btn-success btn-add" type="button">
                                                         <span class="fa fa-plus"></span>
@@ -57,55 +59,21 @@
                                 <div class="form-group m-4">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input col-12" checked="" id="remember" type="checkbox">
-                                            Answer Required?</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group-item card-body Question">
-                                <label for="inputPassword">Question</label>
-                                <div class="form-row">
-                                    <div class="col-9">
-                                        <input type="text" class="form-control" placeholder="City">
-                                    </div>
-                                    <div class="col-lg-3 col-md-9">
-                                        <select class="form-control QuestionType">
-                                            <option value="Paragraph">Paragraph</option>
-                                            <option selected value="MultipleChoice">Multiple choice</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="Options">
-                                    <div class="control-group mt-3" id="fields">
-                                        <div class="controls">
-                                            <div class="entry input-group col-xs-3">
-                                                <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
-                                                <span class="input-group-btn input-group-append">
-                                                    <button class="btn btn-success btn-add" type="button">
-                                                        <span class="fa fa-plus"></span>
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group m-4">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input col-12" checked="" id="remember" type="checkbox">
+                                            <input class="form-control form-check-input col-lg-6 col-md-12 isRequired" checked="" id="isRequired" type="checkbox">
                                             Required?</label>
                                     </div>
                                 </div>
                             </div>
-                    </div>
-                </form>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-2 col-md-4 col-sm-2">
-            <ul class="list-group">
-                <li class="list-group-item active" onclick="addQuestion();">Add Question</li>
-                <li class="list-group-item" onclick="addTextarea()">Save Form</li>
-            </ul>
+            <div class="col-lg-2 col-md-4 col-sm-2 mt-5">
+                <ul class="list-group">
+                    <li class="list-group-item active addQuestion">Add Question</li>
+                    <li class="list-group-item saveForm">Save Form</li>
+                </ul>
+            </div>
         </div>
     </div>
 
